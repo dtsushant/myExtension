@@ -1,0 +1,12 @@
+body {
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 100%;
+}
+#container{
+    width:400px;
+    background: #cccccc;
+}
+
+.hz{
+    display: inline-flex !important;
+}

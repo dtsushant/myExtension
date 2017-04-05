@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "My Extension",
+  "description": "This extension does Whatever the Fuck I like",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "My Extension"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "<all_urls>","debugger",
+    "storage"
+  ],
+  "icons": {
+    "16" : "imageinfo-16.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/menuManager.js"
+    ]
+  }
+}

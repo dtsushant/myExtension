@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+</head><!--from  w  w w.ja v a  2s  . c  o  m-->
+<body ng-app="myApp">
+<div ng-controller="GreetingController">
+    {{ greeting }}
+
+    <a href="#" ng-click="loginAndPunchin()"><span class="glyphicon glyphicon-chevron-right"></span> DRM Login and Punchin</a>
+    <a href="//www.deerwalk.com" target="_blank">a</a>
+</div>
+<script type='text/javascript'>
+
+    function test(a, callback){
+        console.log(a)
+        callback(a)
+    }
+
+    function callerBacker(val){
+        console.log("logging from callback "+val);
+    }
+
+    test("hello", callerBacker)
+    var internalCaller="someting";
+    test("passing function itself from variable", function(val){
+        console.log("custom call "+ val)
+    });
+
+</script>
+
+
+<script type='text/javascript'>
+    var myApp = angular.module('myApp',[]);
+
+    myApp.controller('GreetingController',  function($scope,$timeout,appLoginStorageService) {
+        $scope.greeting = 'Hola!';
+        $scope.loginAndPunchin=function(){
+            //$window.location.href = 'https://drm.deerwalk.com/login/auth';
+            $timeout(function(){alert("hello")}, 3000);
+            //alert(appLoginStorageService.data);
+            //chrome.tabs.create({ url: 'https://drm.deerwalk.com/login/auth' });
+            //alert("hello");
+        };
+    });
+
+    myApp.service('appLoginStorageService', function ($q) {
+        var _this = this;
+        this.data = ["a","b","c","d","e"];
+    });
+
+
+
+</script>
+
+
+<form name="logininfoForm" novalidate>
+
+    <p>Username:<br>
+        <input type="text" name="user" ng-model="user" required>
+<span style="color:red" ng-show="logininfoForm.user.$dirty && logininfoForm.user.$invalid">
+<span ng-show="logininfoForm.user.$error.required">Username is required.</span>
+</span>
+    </p>
+
+    <p>Email:<br>
+        <input type="email" name="email" ng-model="email" required>
+<span style="color:red" ng-show="logininfoForm.email.$dirty && logininfoForm.email.$invalid">
+<span ng-show="logininfoForm.email.$error.required">Email is required.</span>
+<span ng-show="logininfoForm.email.$error.email">Invalid email address.</span>
+</span>
+    </p>
+
+    <p>
+        <input type="submit"
+               ng-disabled="logininfoForm.user.$dirty && logininfoForm.user.$invalid ||
+logininfoForm.email.$dirty && logininfoForm.email.$invalid">
+    </p>
+
+</form>
+
+
+</body>
+</html>
+

@@ -1,0 +1,93 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+<head>
+    <title>My Extension</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="css/myExtension.css" rel="stylesheet" />
+    <script src="lib/angular/angular.min.js"></script>
+    <!--<script src="custom.js"></script>-->
+</head>
+<body ng-app="myApp">
+    <buttom id="clickme">click me</buttom>
+    <div class='container' ng-controller='GreetingController'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <h6>{{ greeting }}</h6>
+                <!--<a ng-click="test() ">try to click me </a>-->
+                <button ng-click="toggleLoginInfoForm()" class="btn btn-default">
+                    <span ng-show="!addState">Add new Login Info <span class="glyphicon glyphicon-plus"></span></span>
+                    <span ng-show="addState">Cancel <span class="glyphicon glyphicon-remove"></span></span>
+
+                </button>
+                <div ng-show="addState">
+                    <form class="form-inline" ng-submit='addLoginInfo()' name="logininfoForm" >
+                        <div>
+                            <label>Url</label>
+                            <input type="text" class="form-control" name="url" required ng-model="logininfo.url">
+                            <span style="color:red" ng-show="logininfoForm.url.$dirty && logininfoForm.url.$invalid">
+                                <span ng-show="logininfoForm.url.$error.required">Username is required.</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="userkey">userkey:</label>
+                            <input type="text" class="form-control" name="userkey" id="userkey" required ng-model="logininfo.userkey">
+                            <span style="color:red" ng-show="logininfoForm.userkey.$dirty && logininfoForm.userkey.$invalid">
+                                <span ng-show="logininfoForm.userkey.$error.required">userkey is required.</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" name="username" id="username" required ng-model="logininfo.username">
+                            <span style="color:red" ng-show="logininfoForm.username.$dirty && logininfoForm.username.$invalid">
+                                <span ng-show="logininfoForm.username.$error.required">username is required.</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="passkey">passkey:</label>
+                            <input type="text" name="passkey" class="form-control" id="passkey" required ng-model="logininfo.passkey">
+                            <span style="color:red" ng-show="logininfoForm.passkey.$dirty && logininfoForm.passkey.$invalid">
+                                <span ng-show="logininfoForm.passkey.$error.required">passkey is required.</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required ng-model="logininfo.password">
+                            <span style="color:red" ng-show="logininfoForm.password.$dirty && logininfoForm.password.$invalid">
+                                <span ng-show="logininfoForm.password.$error.required">password is required.</span>
+                            </span>
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+
+                    </form>
+
+                </div>
+                <!--<input type="submit" name="Punch In" id="pIn" class="punchIn punchInCheck" value="Punch In" style="background-color: green;" onclick="pInOut()">-->
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#" ng-click="loginAndPunchin()"><span class="glyphicon glyphicon-chevron-right"></span> DRM Login and Punchin</a></li>
+                </ul>
+
+                <!--HASHMAP iteration is not supported so this hack-->
+                <ul class="nav nav-pills nav-stacked" ng-repeat="n in [].constructor(data.length) track by $index">
+                    <li class="hz"><a href="#" ng-click="login(data[$index])"><span class="glyphicon glyphicon-chevron-right"></span>{{data[$index].url}}</a> <a href="#" ng-click="remove(data[$index])"><span class="glyphicon glyphicon-remove"></span></a></li>
+                </ul>
+
+                <!--<ul class="nav nav-pills nav-stacked" ng-repeat='d in data'>
+                    <li><a href="#" ng-click="loginAndPunchin()"><span class="glyphicon glyphicon-chevron-right"></span> {{d.url}}</a></li>
+
+                </ul>-->
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="js/custom.js"></script>
+</body>
+</html>
